@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Naho & Andrés 💜</title>
+  <style>
+    :root{
+      --bg:#09060f;
+      --surface:rgba(255,255,255,0.07);
+      --border:rgba(255,255,255,0.12);
+      --text:#f8f4ff;
+      --muted:#d8caef;
+      --purple:#8b5cf6;
+      --purple-2:#a855f7;
+      --purple-3:#e9dbff;
+      --pink:#f472b6;
+      --blue:#93c5fd;
+      --shadow:0 20px 60px rgba(0,0,0,.35);
+      --radius-xl:32px;
+      --radius-lg:24px;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top, #2d1850 0%, #171024 38%, #09060f 100%);
+      overflow-x:hidden;
+    }
+
+    .bg-layer,.bg-stars,.bg-hearts{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      z-index:0;
+    }
+
+    .bg-layer{
+      background:
+        radial-gradient(circle at 12% 20%, rgba(168,85,247,.18), transparent 26%),
+        radial-gradient(circle at 88% 12%, rgba(244,114,182,.12), transparent 18%),
+        radial-gradient(circle at 55% 75%, rgba(147,197,253,.08), transparent 20%);
+      filter:blur(8px);
+    }
+
+    .bg-stars{
+      background-image:
+        radial-gradient(2px 2px at 20px 30px, #ffffffaa 40%, transparent 50%),
+        radial-gradient(2px 2px at 120px 70px, #d8b4fe88 40%, transparent 50%),
+        radial-gradient(1.5px 1.5px at 220px 90px, #ffffff88 40%, transparent 50%),
+        radial-gradient(2px 2px at 60px 160px, #f9a8d488 40%, transparent 50%);
+      background-size:260px 260px;
+      animation:starsMove 35s linear infinite;
+      opacity:.5;
+    }
+
+    .bg-hearts span{
+      position:absolute;
+      bottom:-40px;
+      color:#d8b4fe;
+      opacity:.13;
+      font-size:18px;
+      animation:floatUp linear infinite;
+    }
+
+    @keyframes starsMove{
+      from{transform:translateY(0)}
+      to{transform:translateY(260px)}
+    }
+
+    @keyframes floatUp{
+      from{transform:translateY(0) scale(1)}
+      to{transform:translateY(-115vh) scale(1.4)}
+    }
+
+    .container{
+      position:relative;
+      z-index:1;
+      width:min(1220px, 92%);
+      margin:0 auto;
+    }
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:20;
+      backdrop-filter:blur(12px);
+      background:rgba(9,6,15,.55);
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+
+    .topbar-inner{
+      width:min(1220px, 92%);
+      margin:0 auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding:14px 0;
+    }
+
+    .brand{
+      font-weight:700;
+      letter-spacing:.3px;
+      white-space:nowrap;
+    }
+
+    .nav{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    .nav a{
+      color:var(--text);
+      text-decoration:none;
+      padding:10px 14px;
+      border-radius:999px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.08);
+      font-size:14px;
+      transition:.25s ease;
+    }
+
+    .nav a:hover{
+      background:rgba(255,255,255,.12);
+      transform:translateY(-1px);
+    }
+
+    header{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:40px 0 30px;
+      text-align:center;
+    }
+
+    .hero{
+      width:100%;
+      max-width:1040px;
+      margin:0 auto;
+      border:1px solid var(--border);
+      background:linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.04));
+      border-radius:38px;
+      padding:40px 24px;
+      box-shadow:var(--shadow);
+      backdrop-filter:blur(14px);
+    }
+
+    .hero-badge{
+      display:inline-block;
+      padding:9px 16px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.08);
+      color:var(--purple-3);
+      font-size:14px;
+      margin-bottom:22px;
+    }
+
+    .hero h1{
+      font-size:clamp(2.5rem, 7vw, 5.8rem);
+      line-height:1.02;
+      max-width:940px;
+      margin:0 auto 16px;
+    }
+
+    .gradient{
+      background:linear-gradient(90deg, var(--purple-2), var(--pink), var(--blue));
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+
+    .hero p{
+      max-width:840px;
+      margin:0 auto 22px;
+      color:var(--muted);
+      line-height:1.9;
+      font-size:1.08rem;
+    }
+
+    .hero-buttons{
+      display:flex;
+      gap:14px;
+      justify-content:center;
+      align-items:center;
+      flex-wrap:wrap;
+      margin-top:18px;
+    }
+
+    .btn{
+      border:none;
+      border-radius:18px;
+      padding:14px 22px;
+      cursor:pointer;
+      font-size:16px;
+      transition:.25s ease;
+      text-decoration:none;
+      display:inline-block;
+    }
+
+    .btn:hover{transform:translateY(-2px) scale(1.02)}
+
+    .btn-primary{
+      color:#fff;
+      background:linear-gradient(90deg, #7c3aed, #a855f7, #ec4899);
+      box-shadow:0 12px 30px rgba(124,58,237,.28);
+    }
+
+    .btn-secondary{
+      color:#fff;
+      background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.12);
+    }
+
+    .music-box{
+      margin-top:24px;
+      max-width:680px;
+      margin-left:auto;
+      margin-right:auto;
+      padding:20px;
+      border-radius:24px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.10);
+    }
+
+    .music-box p{
+      margin:0 0 14px;
+      color:var(--purple-3);
+      font-size:1rem;
+      line-height:1.8;
+    }
+
+    .hero-mini{
+      margin-top:28px;
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:14px;
+    }
+
+    .mini-card{
+      padding:18px;
+      border-radius:22px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.10);
+      text-align:center;
+    }
+
+    .mini-card strong{
+      display:block;
+      font-size:1.35rem;
+      margin-bottom:6px;
+      color:var(--purple-3);
+    }
+
+    section{
+      padding:92px 0;
+    }
+
+    .section-head{
+      text-align:center;
+      margin:0 auto 34px;
+      max-width:860px;
+    }
+
+    .section-head h2{
+      font-size:clamp(2rem, 4vw, 3.4rem);
+      margin-bottom:10px;
+    }
+
+    .section-head p{
+      max-width:780px;
+      margin:auto;
+      color:var(--muted);
+      line-height:1.85;
+    }
+
+    .card{
+      width:100%;
+      margin:0 auto;
+      background:var(--surface);
+      border:1px solid var(--border);
+      border-radius:var(--radius-xl);
+      padding:24px;
+      box-shadow:var(--shadow);
+      backdrop-filter:blur(10px);
+    }
+
+    .card h3{
+      margin-bottom:10px;
+      font-size:1.2rem;
+    }
+
+    .card p,.card li{
+      color:var(--muted);
+      line-height:1.85;
+    }
+
+    .timeline{
+      max-width:980px;
+      margin:0 auto;
+      display:grid;
+      gap:18px;
+      position:relative;
+    }
+
+    .timeline::before{
+      content:"";
+      position:absolute;
+      top:0;
+      bottom:0;
+      left:18px;
+      width:3px;
+      border-radius:10px;
+      background:linear-gradient(var(--purple), var(--pink));
+    }
+
+    .timeline-item{
+      position:relative;
+      margin-left:42px;
+      padding:22px;
+      border-radius:26px;
+      background:var(--surface);
+      border:1px solid var(--border);
+      backdrop-filter:blur(10px);
+    }
+
+    .timeline-item::before{
+      content:"";
+      position:absolute;
+      left:-32px;
+      top:24px;
+      width:16px;
+      height:16px;
+      border-radius:50%;
+      background:var(--purple-2);
+      box-shadow:0 0 0 6px rgba(168,85,247,.18);
+    }
+
+    .date{
+      display:inline-block;
+      margin-bottom:8px;
+      font-size:14px;
+      color:var(--purple-3);
+    }
+
+    .counter-grid{
+      display:grid;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:16px;
+      margin-top:22px;
+    }
+
+    .count-box{
+      text-align:center;
+      padding:20px 12px;
+      border-radius:24px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.10);
+    }
+
+    .count-box strong{
+      display:block;
+      font-size:2.2rem;
+      color:var(--purple-3);
+      margin-bottom:6px;
+    }
+
+    .stats-row{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:16px;
+      margin-top:18px;
+    }
+
+    .stat{
+      padding:20px;
+      border-radius:22px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.10);
+      text-align:center;
+      color:var(--muted);
+      line-height:1.7;
+    }
+
+    .stat strong{
+      display:block;
+      font-size:1.5rem;
+      margin-bottom:8px;
+      color:var(--purple-3);
+    }
+
+    .masonry{
+      columns:3 220px;
+      column-gap:16px;
+      width:100%;
+    }
+
+    .media-card{
+      break-inside:avoid;
+      margin-bottom:16px;
+      position:relative;
+      overflow:hidden;
+      border-radius:24px;
+      border:1px solid rgba(255,255,255,.10);
+      background:#120d1f;
+      cursor:pointer;
+    }
+
+    .media-card img{
+      width:100%;
+      display:block;
+      object-fit:cover;
+    }
+
+    .media-card .tag{
+      position:absolute;
+      left:12px;
+      bottom:12px;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(9,6,15,.68);
+      border:1px solid rgba(255,255,255,.08);
+      color:#fff;
+      font-size:13px;
+      backdrop-filter:blur(8px);
+    }
+
+    .video-grid{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0, 1fr));
+      gap:18px;
+      align-items:stretch;
+    }
+
+    .video-card{
+      padding:16px;
+      border-radius:26px;
+      background:var(--surface);
+      border:1px solid var(--border);
+      box-shadow:var(--shadow);
+      width:100%;
+    }
+
+    .video-card h3{
+      text-align:center;
+      margin-bottom:12px;
+      color:var(--text);
+    }
+
+    .video-frame{
+      position:relative;
+      width:100%;
+      margin:0 auto;
+      border-radius:20px;
+      overflow:hidden;
+      background:#000;
+      aspect-ratio:16/9;
+      border:1px solid rgba(255,255,255,.10);
+    }
+
+    .video-frame video{
+      width:100%;
+      height:100%;
+      display:block;
+      object-fit:cover;
+    }
+
+    .video-card:last-child:nth-child(odd){
+      grid-column:1 / -1;
+      max-width:520px;
+      justify-self:center;
+    }
+
+    .letter{
+      max-width:920px;
+      margin:0 auto;
+      white-space:pre-line;
+      line-height:1.95;
+      font-size:1.08rem;
+    }
+
+    .quote-box{
+      max-width:980px;
+      margin:0 auto;
+      text-align:center;
+      padding:34px 24px;
+      border-radius:34px;
+      background:linear-gradient(180deg, rgba(139,92,246,.18), rgba(255,255,255,.04));
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow:var(--shadow);
+    }
+
+    .quote-box p{
+      font-size:clamp(1.4rem, 2.8vw, 2.2rem);
+      line-height:1.6;
+    }
+
+    .quote-box small{
+      display:block;
+      margin-top:12px;
+      color:var(--muted);
+    }
+
+    .final-box{
+      text-align:center;
+      max-width:900px;
+      margin:0 auto;
+    }
+
+    .hidden-message{
+      display:none;
+      margin-top:22px;
+      padding:26px;
+      border-radius:26px;
+      background:linear-gradient(180deg, rgba(168,85,247,.18), rgba(255,255,255,.06));
+      border:1px solid rgba(255,255,255,.12);
+      line-height:1.9;
+      color:var(--text);
+    }
+
+    .lightbox{
+      position:fixed;
+      inset:0;
+      background:rgba(5,3,9,.9);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+      z-index:40;
+    }
+
+    .lightbox.active{
+      display:flex;
+    }
+
+    .lightbox-inner{
+      width:min(1100px, 96%);
+      position:relative;
+      margin:0 auto;
+    }
+
+    .lightbox img,
+    .lightbox video{
+      width:100%;
+      max-height:86vh;
+      object-fit:contain;
+      background:#000;
+      border-radius:24px;
+      border:1px solid rgba(255,255,255,.12);
+      display:block;
+      margin:0 auto;
+    }
+
+    .close{
+      position:absolute;
+      top:-14px;
+      right:-14px;
+      width:48px;
+      height:48px;
+      border:none;
+      border-radius:50%;
+      background:rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.12);
+      color:#fff;
+      font-size:20px;
+      cursor:pointer;
+      backdrop-filter:blur(8px);
+    }
+
+    footer{
+      padding:50px 0 70px;
+      text-align:center;
+      color:var(--muted);
+    }
+
+    @media (max-width: 1024px){
+      .video-grid,
+      .stats-row,
+      .counter-grid,
+      .hero-mini{
+        grid-template-columns:1fr;
+      }
+
+      .video-card:last-child:nth-child(odd){
+        grid-column:auto;
+        max-width:100%;
+        justify-self:stretch;
+      }
+    }
+
+    @media (max-width: 900px){
+      .masonry{
+        columns:2 220px;
+      }
+    }
+
+    @media (max-width: 760px){
+      .topbar-inner{
+        flex-direction:column;
+        align-items:center;
+        text-align:center;
+      }
+
+      .nav{
+        justify-content:center;
+      }
+
+      .timeline::before{
+        left:12px;
+      }
+
+      .timeline-item{
+        margin-left:30px;
+      }
+
+      .timeline-item::before{
+        left:-25px;
+      }
+
+      .hero{
+        padding:30px 18px;
+      }
+
+      .masonry{
+        columns:1 220px;
+      }
+
+      section{
+        padding:76px 0;
+      }
+
+      .hero-buttons{
+        flex-direction:column;
+      }
+
+      .btn{
+        width:100%;
+        max-width:320px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-layer"></div>
+  <div class="bg-stars"></div>
+  <div class="bg-hearts">
+    <span style="left:6%;animation-duration:14s;">❤</span>
+    <span style="left:15%;animation-duration:17s;">❤</span>
+    <span style="left:24%;animation-duration:15s;">❤</span>
+    <span style="left:38%;animation-duration:19s;">❤</span>
+    <span style="left:52%;animation-duration:16s;">❤</span>
+    <span style="left:67%;animation-duration:22s;">❤</span>
+    <span style="left:80%;animation-duration:18s;">❤</span>
+    <span style="left:92%;animation-duration:20s;">❤</span>
+  </div>
+
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">Naho & Andrés 💜</div>
+      <div class="nav">
+        <a href="#historia">Historia</a>
+        <a href="#tiempo">Tiempo</a>
+        <a href="#galeria">Galería</a>
+        <a href="#videos">Videos</a>
+        <a href="#carta">Carta</a>
+      </div>
+    </div>
+  </div>
+
+  <header>
+    <div class="container">
+      <div class="hero">
+        <div class="hero-badge">26 de agosto de 2020 • Nuestro inicio 💜</div>
+        <h1>Solo quería <span class="gradient">5 minutos</span> para decirte algo… y terminé encontrando una historia que quiero cuidar toda la vida</h1>
+        <p>
+          Todo empezó aquella mañana en la que te pregunté si podía llamarte solo 5 minutos para decirte algo.
+          En esa llamada te pedí que fueras mi novia, y desde ese instante comenzó una historia que con el tiempo se llenó de recuerdos, de emociones y de momentos que significan muchísimo para mí.
+        </p>
+
+        <div class="hero-buttons">
+          <button class="btn btn-primary" onclick="document.getElementById('historia').scrollIntoView({behavior:'smooth'})">Nuestra historia</button>
+          <button class="btn btn-secondary" onclick="document.getElementById('galeria').scrollIntoView({behavior:'smooth'})">Nuestros recuerdos</button>
+        </div>
+
+        <div class="music-box">
+          <p>Aplasta aquí para reproducir la canción que te dediqué 💜</p>
+          <button class="btn btn-primary" id="musicButton" onclick="toggleAudio()">▶ Reproducir canción</button>
+          <audio id="audio" src="audio.mp3" preload="auto"></audio>
+        </div>
+
+        <div class="hero-mini">
+          <div class="mini-card">
+            <strong>26/08/2020</strong>
+            <span>El día en que te pedí que fueras mi novia.</span>
+          </div>
+          <div class="mini-card">
+            <strong>Cada 26</strong>
+            <span>Una fecha que siempre me recuerda el inicio de lo nuestro.</span>
+          </div>
+          <div class="mini-card">
+            <strong>Tú y yo</strong>
+            <span>Una historia que sigue creciendo con el tiempo.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section id="historia">
+    <div class="container">
+      <div class="section-head">
+        <h2>Nuestra historia</h2>
+        <p>
+          Hay momentos que parecen simples mientras ocurren, pero con el tiempo uno entiende que ahí comenzó algo inmenso.
+        </p>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <span class="date">26 de agosto del 2020 • En la mañana</span>
+          <h3>Esos 5 minutos</h3>
+          <p>
+            Esa mañana te pregunté si podía llamarte solo 5 minutos para decirte algo.
+            Lo que parecía algo pequeño terminó convirtiéndose en uno de los momentos más importantes de mi vida.
+          </p>
+        </div>
+
+        <div class="timeline-item">
+          <span class="date">Ese mismo día</span>
+          <h3>La pregunta que lo cambió todo</h3>
+          <p>
+            En esa llamada te pedí que fueras mi novia.
+            Y desde ese instante comenzó oficialmente esta historia tan bonita entre nosotros.
+          </p>
+        </div>
+
+        <div class="timeline-item">
+          <span class="date">Con el tiempo</span>
+          <h3>Cada 26 se volvió especial</h3>
+          <p>
+            Desde entonces, cada 26 tiene un significado muy especial para mí,
+            porque me recuerda el día en que empezó todo lo nuestro y un mes más a tu lado.
+          </p>
+        </div>
+
+        <div class="timeline-item">
+          <span class="date">Hasta hoy</span>
+          <h3>Todo lo que hemos construido</h3>
+          <p>
+            Hoy miro hacia atrás y me doy cuenta de que aquellos 5 minutos no fueron solo una llamada,
+            fueron el inicio de recuerdos, fotos, videos, emociones y momentos que significan muchísimo para mí.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="tiempo">
+    <div class="container">
+      <div class="section-head">
+        <h2>Todo el tiempo que llevamos juntos</h2>
+        <p>
+          Desde el 26 de agosto del 2020 hasta este momento exacto.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="counter-grid">
+          <div class="count-box"><strong id="years">0</strong><span>Años</span></div>
+          <div class="count-box"><strong id="months">0</strong><span>Meses</span></div>
+          <div class="count-box"><strong id="days">0</strong><span>Días</span></div>
+          <div class="count-box"><strong id="hours">0</strong><span>Horas</span></div>
+        </div>
+
+        <div class="stats-row">
+          <div class="stat">
+            <strong id="totalDays">0</strong>
+            <span>Días compartiendo esta historia contigo.</span>
+          </div>
+          <div class="stat">
+            <strong id="totalMonths">0</strong>
+            <span>Meses celebrando lo nuestro.</span>
+          </div>
+          <div class="stat">
+            <strong>26</strong>
+            <span>La fecha que convirtió una mañana normal en algo inolvidable.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="galeria">
+    <div class="container">
+      <div class="section-head">
+        <h2>Nuestros recuerdos</h2>
+        <p>
+          Hay imágenes que no solo guardan un momento, también guardan lo que uno sintió al vivirlo.
+        </p>
+      </div>
+
+      <div class="masonry">
+        <div class="media-card" onclick="openLightbox('image','foto1.jpg')"><img src="foto1.jpg" alt="Recuerdo 1"><span class="tag">Recuerdo 1</span></div>
+        <div class="media-card" onclick="openLightbox('image','foto2.jpg')"><img src="foto2.jpg" alt="Recuerdo 2"><span class="tag">Recuerdo 2</span></div>
+        <div class="media-card" onclick="openLightbox('image','foto3.jpg')"><img src="foto3.jpg" alt="Recuerdo 3"><span class="tag">Recuerdo 3</span></div>
+        <div class="media-card" onclick="openLightbox('image','foto4.jpg')"><img src="foto4.jpg" alt="Recuerdo 4"><span class="tag">Recuerdo 4</span></div>
+        <div class="media-card" onclick="openLightbox('image','foto5.jpg')"><img src="foto5.jpg" alt="Recuerdo 5"><span class="tag">Recuerdo 5</span></div>
+        <div class="media-card" onclick="openLightbox('image','foto6.jpg')"><img src="foto6.jpg" alt="Recuerdo 6"><span class="tag">Recuerdo 6</span></div>
+        <div class="media-card" onclick="openLightbox('image','foto7.jpg')"><img src="foto7.jpg" alt="Recuerdo 7"><span class="tag">Recuerdo 7</span></div>
+        <div class="media-card" onclick="openLightbox('image','foto8.jpg')"><img src="foto8.jpg" alt="Recuerdo 8"><span class="tag">Recuerdo 8</span></div>
+        <div class="media-card" onclick="openLightbox('image','foto9.jpg')"><img src="foto9.jpg" alt="Recuerdo 9"><span class="tag">Recuerdo 9</span></div>
+        <div class="media-card" onclick="openLightbox('image','foto10.jpg')"><img src="foto10.jpg" alt="Recuerdo 10"><span class="tag">Recuerdo 10</span></div>
+        <div class="media-card" onclick="openLightbox('image','foto11.jpg')"><img src="foto11.jpg" alt="Recuerdo 11"><span class="tag">Recuerdo 11</span></div>
+        <div class="media-card" onclick="openLightbox('image','foto12.jpg')"><img src="foto12.jpg" alt="Recuerdo 12"><span class="tag">Recuerdo 12</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="videos">
+    <div class="container">
+      <div class="section-head">
+        <h2>Nuestros videos</h2>
+        <p>
+          Hay momentos que en foto se ven bonitos, pero en video vuelven a latir.
+        </p>
+      </div>
+
+      <div class="video-grid">
+        <div class="video-card">
+          <h3>Video 1</h3>
+          <div class="video-frame">
+            <video src="video1.mp4" muted autoplay loop playsinline preload="metadata"></video>
+          </div>
+        </div>
+
+        <div class="video-card">
+          <h3>Video 2</h3>
+          <div class="video-frame">
+            <video src="video2.mp4" muted autoplay loop playsinline preload="metadata"></video>
+          </div>
+        </div>
+
+        <div class="video-card">
+          <h3>Video 3</h3>
+          <div class="video-frame">
+            <video src="video3.mp4" muted autoplay loop playsinline preload="metadata"></video>
+          </div>
+        </div>
+
+        <div class="video-card">
+          <h3>Video 4</h3>
+          <div class="video-frame">
+            <video src="video4.mp4" muted autoplay loop playsinline preload="metadata"></video>
+          </div>
+        </div>
+
+        <div class="video-card">
+          <h3>Video 5</h3>
+          <div class="video-frame">
+            <video src="video5.mp4" muted autoplay loop playsinline preload="metadata"></video>
+          </div>
+        </div>
+
+        <div class="video-card">
+          <h3>Video 6</h3>
+          <div class="video-frame">
+            <video src="video6.mp4" muted autoplay loop playsinline preload="metadata"></video>
+          </div>
+        </div>
+
+        <div class="video-card">
+          <h3>Video 7</h3>
+          <div class="video-frame">
+            <video src="video7.mp4" muted autoplay loop playsinline preload="metadata"></video>
+          </div>
+        </div>
+
+        <div class="video-card">
+          <h3>Video 8</h3>
+          <div class="video-frame">
+            <video src="video8.mp4" muted autoplay loop playsinline preload="metadata"></video>
+          </div>
+        </div>
+
+        <div class="video-card">
+          <h3>Video 9</h3>
+          <div class="video-frame">
+            <video src="video9.mp4" muted autoplay loop playsinline preload="metadata"></video>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="carta">
+    <div class="container">
+      <div class="section-head">
+        <h2>Una carta para ti</h2>
+      </div>
+
+      <div class="card letter">
+Naho,
+
+hay momentos que parecen pequeños mientras ocurren,
+pero con el tiempo se convierten en recuerdos que uno guarda para siempre.
+Para mí, uno de esos momentos fue la mañana del 26 de agosto del 2020.
+
+Ese día te pregunté si podía llamarte solo 5 minutos para decirte algo.
+Y en esos cinco minutos empezó una historia que, hasta hoy,
+sigue siendo una de las partes más bonitas de mi vida.
+
+Todavía me gusta pensar en ese momento,
+porque sin hacer mucho ruido cambió todo para mí.
+Lo que parecía una simple llamada terminó siendo el comienzo de algo muy especial entre nosotros.
+
+Desde entonces, cada 26 tiene un significado distinto.
+No es solo una fecha en el calendario.
+Es el recuerdo del día en que te pedí que fueras mi novia
+y del comienzo de todo lo que hemos vivido juntos.
+
+A veces pienso en todos los meses cumplidos,
+en todos los días compartidos,
+en todos los recuerdos que hemos ido construyendo,
+y me doy cuenta de que lo nuestro se volvió parte muy importante de mi vida.
+
+Gracias por cada momento.
+Gracias por cada recuerdo.
+Gracias por seguir aquí.
+Gracias por formar parte de mi historia de una manera tan especial.
+
+Si volviera a ese 26 de agosto,
+volvería a escribirte,
+volvería a pedirte esos 5 minutos,
+volvería a mirar ese momento como el inicio de algo hermoso,
+y volvería a elegirte una y otra vez.
+
+Con amor,
+Andrés 💜
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="quote-box">
+        <p>
+          “Solo quería 5 minutos para decirte algo, y terminé encontrando una historia que quiero cuidar toda la vida.”
+        </p>
+        <small>Andrés para Naho</small>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container final-box">
+      <div class="section-head">
+        <h2>Para terminar</h2>
+        <p>
+          Hay historias que uno no quiere olvidar nunca.
+        </p>
+      </div>
+
+      <button class="btn btn-primary" onclick="mostrarFinal()">Abrir</button>
+
+      <div class="hidden-message" id="finalMessage">
+        A veces pienso en lo mucho que significaron para mí esos 5 minutos,
+        porque en realidad no fueron solo 5 minutos:
+        fueron el comienzo de todo lo que hoy siento por ti.
+        <br><br>
+        Gracias por cada año, cada mes, cada recuerdo y cada momento que hemos construido juntos.
+        <br><br>
+        Si pudiera empezar todo otra vez,
+        volvería a buscarte,
+        volvería a llamarte,
+        y volvería a elegirte sin dudarlo. 💜
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    Hecho con amor, recuerdos y una historia que comenzó el 26 de agosto del 2020 💜
+  </footer>
+
+  <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+    <div class="lightbox-inner">
+      <button class="close" onclick="forceCloseLightbox()">✕</button>
+      <div id="lightboxContent"></div>
+    </div>
+  </div>
+
+  <script>
+    const startDate = new Date("2020-08-26T08:00:00");
+    const audio = document.getElementById("audio");
+    const musicButton = document.getElementById("musicButton");
+
+    function calculateDiff(start, end){
+      let years = end.getFullYear() - start.getFullYear();
+      let months = end.getMonth() - start.getMonth();
+      let days = end.getDate() - start.getDate();
+
+      if(days < 0){
+        months--;
+        const previousMonth = new Date(end.getFullYear(), end.getMonth(), 0);
+        days += previousMonth.getDate();
+      }
+
+      if(months < 0){
+        years--;
+        months += 12;
+      }
+
+      return {years, months, days};
+    }
+
+    function updateCounter(){
+      const now = new Date();
+      const diff = calculateDiff(startDate, now);
+      const totalMs = now - startDate;
+      const totalDays = Math.floor(totalMs / (1000 * 60 * 60 * 24));
+      const totalHours = Math.floor((totalMs / (1000 * 60 * 60)) % 24);
+      const totalMonths = (now.getFullYear() - startDate.getFullYear()) * 12 + (now.getMonth() - startDate.getMonth()) - (now.getDate() < startDate.getDate() ? 1 : 0);
+
+      document.getElementById("years").textContent = diff.years;
+      document.getElementById("months").textContent = diff.months;
+      document.getElementById("days").textContent = diff.days;
+      document.getElementById("hours").textContent = totalHours;
+      document.getElementById("totalDays").textContent = totalDays;
+      document.getElementById("totalMonths").textContent = totalMonths >= 0 ? totalMonths : 0;
+    }
+
+    function toggleAudio(){
+      if(audio.paused){
+        audio.play().then(() => {
+          musicButton.textContent = "⏸ Pausar canción";
+        }).catch(() => {});
+      } else {
+        audio.pause();
+        musicButton.textContent = "▶ Reproducir canción";
+      }
+    }
+
+    audio.addEventListener("ended", () => {
+      musicButton.textContent = "▶ Reproducir canción";
+    });
+
+    function mostrarFinal(){
+      const msg = document.getElementById("finalMessage");
+      msg.style.display = "block";
+      msg.scrollIntoView({behavior:"smooth", block:"center"});
+    }
+
+    function openLightbox(type, src){
+      const box = document.getElementById("lightbox");
+      const content = document.getElementById("lightboxContent");
+
+      if(type === "image"){
+        content.innerHTML = `<img src="${src}" alt="Vista ampliada">`;
+      } else {
+        content.innerHTML = `<video src="${src}" muted autoplay loop playsinline controls></video>`;
+      }
+
+      box.classList.add("active");
+    }
+
+    function closeLightbox(e){
+      if(e.target.id === "lightbox"){
+        forceCloseLightbox();
+      }
+    }
+
+    function forceCloseLightbox(){
+      const box = document.getElementById("lightbox");
+      const content = document.getElementById("lightboxContent");
+      box.classList.remove("active");
+      content.innerHTML = "";
+    }
+
+    setInterval(updateCounter, 1000);
+    updateCounter();
+  </script>
+</body>
+</html>
